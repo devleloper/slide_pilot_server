@@ -1,7 +1,6 @@
 package com.devleloper.slidepilot.server;
 
 import java.io.IOException;
-
 import javax.bluetooth.DiscoveryAgent;
 import javax.bluetooth.LocalDevice;
 import javax.bluetooth.UUID;
@@ -12,11 +11,9 @@ import javax.microedition.io.StreamConnectionNotifier;
 public class WaitThread implements Runnable {
 
     private boolean threadStop = false;
-    ProcessConnectionThread processConnectionThread;
-
-    /** Constructor */
-    public WaitThread() {
-    }
+    private StreamConnection connection = null;
+    private StreamConnectionNotifier notifier;
+    private ProcessConnectionThread processConnectionThread;
 
     void setThreadStopper(boolean threadStop) {
         this.threadStop = threadStop;
@@ -42,14 +39,9 @@ public class WaitThread implements Runnable {
         waitForConnection();
     }
 
-    private StreamConnection connection = null;
-    private StreamConnectionNotifier notifier;
-    LocalDevice local = null;
-
-    /** Waiting for connection from devices */
     private void waitForConnection() {
         try {
-            local = LocalDevice.getLocalDevice();
+            LocalDevice local = LocalDevice.getLocalDevice();
             if (local.getDiscoverable() != DiscoveryAgent.GIAC) {
                 local.setDiscoverable(DiscoveryAgent.GIAC);
             }
@@ -57,21 +49,16 @@ public class WaitThread implements Runnable {
             UUID uuid = new UUID(80087355); 
             String url = "btspp://localhost:" + uuid.toString() + ";name=RemoteBluetooth";
             notifier = (StreamConnectionNotifier) Connector.open(url);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return;
-        }
 
-        try {
             System.out.println("waiting for connection...");
             connection = notifier.acceptAndOpen();
+
             processConnectionThread = new ProcessConnectionThread(connection);
             Thread processThread = new Thread(processConnectionThread);
             processThread.start();
+
         } catch (Exception e) {
-            if (!threadStop) {
-                e.printStackTrace();
-            }
+            e.printStackTrace();
         }
     }
 }
