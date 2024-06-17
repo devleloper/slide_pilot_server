@@ -50,14 +50,21 @@ public class WaitThread implements Runnable {
             String url = "btspp://localhost:" + uuid.toString() + ";name=RemoteBluetooth";
             notifier = (StreamConnectionNotifier) Connector.open(url);
 
+            BluetoothMainGUI.updateStatus("Waiting for connection...");
             System.out.println("waiting for connection...");
+            BluetoothMainGUI.updateLog("Waiting for connection...");
+
             connection = notifier.acceptAndOpen();
+            BluetoothMainGUI.updateStatus("Connected");
+            BluetoothMainGUI.updateLog("Device connected");
+
             processConnectionThread = new ProcessConnectionThread(connection);
             Thread processThread = new Thread(processConnectionThread);
             processThread.start();
 
         } catch (Exception e) {
             e.printStackTrace();
+            BluetoothMainGUI.updateLog("Error: " + e.getMessage());
         }
     }
 }

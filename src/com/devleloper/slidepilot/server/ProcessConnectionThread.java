@@ -1,13 +1,10 @@
 package com.devleloper.slidepilot.server;
 
-import java.awt.MouseInfo;
-import java.awt.Point;
-import java.awt.Robot;
+import java.awt.*;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.io.InputStream;
-
 import javax.microedition.io.StreamConnection;
 
 public class ProcessConnectionThread implements Runnable {
@@ -33,6 +30,8 @@ public class ProcessConnectionThread implements Runnable {
             try {
                 inputStream.close();
                 mConnection.close();
+                BluetoothMainGUI.updateStatus("Disconnected");
+                BluetoothMainGUI.updateLog("Device disconnected");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -56,6 +55,7 @@ public class ProcessConnectionThread implements Runnable {
                 int command = inputStream.read();
                 if (command == EXIT_CMD) {
                     System.out.println("finish process");
+                    BluetoothMainGUI.updateLog("Received exit command");
                     break;
                 }
 
@@ -69,6 +69,7 @@ public class ProcessConnectionThread implements Runnable {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            BluetoothMainGUI.updateLog("Error: " + e.getMessage());
         }
     }
 
@@ -114,6 +115,7 @@ public class ProcessConnectionThread implements Runnable {
     private void processCommand(String command) {
         try {
             System.out.println(command);
+            BluetoothMainGUI.updateLog("Received command: " + command);
             if (robot == null) {
                 robot = new Robot();
             }
@@ -199,8 +201,12 @@ public class ProcessConnectionThread implements Runnable {
                 robot.keyRelease(KeyEvent.VK_SHIFT);
                 robot.keyRelease(KeyEvent.VK_F5);
             }
+            if (command.startsWith("*#*HIGHLIGHT*@*")) {
+                BluetoothMainGUI.highlightPointer();
+            }
         } catch (Exception e) {
             e.printStackTrace();
+            BluetoothMainGUI.updateLog("Error: " + e.getMessage());
         }
     }
 
@@ -214,7 +220,6 @@ public class ProcessConnectionThread implements Runnable {
             robot.delay(10);
             robot.keyRelease(keyCode);
             robot.delay(10);
-
         }
     }
 }
