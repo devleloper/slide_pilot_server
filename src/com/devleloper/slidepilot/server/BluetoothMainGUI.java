@@ -92,7 +92,7 @@ public class BluetoothMainGUI {
                 g.setColor(Color.BLACK);
                 g.fillRect(0, 0, bi.getWidth(), bi.getHeight());
 
-                // Создаем прозрачную область в форме круга вокруг курсора
+               
                 Point cursor = MouseInfo.getPointerInfo().getLocation();
                 int radius = 50;
                 int diameter = radius * 2;
@@ -111,14 +111,14 @@ public class BluetoothMainGUI {
                 }
             }
 
-            // Удаляем выделение после небольшой задержки
+            
             try {
-                Thread.sleep(3000); // задержка 3 секунды
+                Thread.sleep(3000); 
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
 
-            // Восстанавливаем исходное изображение экрана
+            
             for (GraphicsDevice gd : gs) {
                 GraphicsConfiguration gc = gd.getDefaultConfiguration();
                 try {
