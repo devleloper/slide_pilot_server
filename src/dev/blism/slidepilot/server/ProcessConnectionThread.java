@@ -1,4 +1,4 @@
-package com.devleloper.slidepilot.server;
+package dev.blism.slidepilot.server;
 
 import java.awt.*;
 import java.awt.event.InputEvent;
@@ -206,9 +206,6 @@ public class ProcessConnectionThread implements Runnable {
                 robot.keyPress(KeyEvent.VK_CONTROL);
                 robot.keyRelease(KeyEvent.VK_CONTROL);
                 robot.keyRelease(KeyEvent.VK_CONTROL);
-            }
-            if (command.startsWith("*#*HIGHLIGHT*@*")) {
-                BluetoothMainGUI.highlightPointer();
             }
         } catch (Exception e) {
             e.printStackTrace();

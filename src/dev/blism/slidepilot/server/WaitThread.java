@@ -1,4 +1,4 @@
-package com.devleloper.slidepilot.server;
+package dev.blism.slidepilot.server;
 
 import java.io.IOException;
 import javax.bluetooth.DiscoveryAgent;
@@ -55,7 +55,7 @@ public class WaitThread implements Runnable {
             BluetoothMainGUI.updateLog("Waiting for connection...");
 
             connection = notifier.acceptAndOpen();
-            BluetoothMainGUI.updateStatus("Connected");
+            BluetoothMainGUI.updateStatus("Connected!");
             BluetoothMainGUI.updateLog("Device connected");
 
             processConnectionThread = new ProcessConnectionThread(connection);

@@ -1,4 +1,4 @@
-package com.devleloper.slidepilot.server;
+package dev.blism.slidepilot.server;
 
 public class RemoteBluetoothServer{
 
