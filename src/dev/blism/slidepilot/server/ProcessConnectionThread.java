@@ -30,7 +30,7 @@ public class ProcessConnectionThread implements Runnable {
             try {
                 inputStream.close();
                 mConnection.close();
-                BluetoothMainGUI.updateStatus("Disconnected");
+                BluetoothMainGUI.updateStatus("Stopped");
                 BluetoothMainGUI.updateLog("Device disconnected");
             } catch (IOException e) {
                 e.printStackTrace();

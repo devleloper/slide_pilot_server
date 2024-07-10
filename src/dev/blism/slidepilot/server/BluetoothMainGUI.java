@@ -14,8 +14,8 @@ public class BluetoothMainGUI {
         JFrame f = new JFrame();// creating instance of JFrame
         WaitThread waitThread = new WaitThread();
 
-        currentStatus = new JLabel("Current Status: Stopped", SwingConstants.CENTER);
-        
+        currentStatus = new JLabel("<html><span style='color:red'>Current Status: Stopped</span></html>", SwingConstants.CENTER);
+
         logArea = new JTextArea();
         logArea.setEditable(false);
         JScrollPane logScrollPane = new JScrollPane(logArea);
@@ -29,7 +29,7 @@ public class BluetoothMainGUI {
             public void actionPerformed(ActionEvent e) {
                 startServer.setEnabled(false);
                 stopServer.setEnabled(true);
-                currentStatus.setText("Current Status: Running");
+                updateStatus("Running");
                 updateLog("Server started, waiting for connection...");
                 Thread waitThreadInstance = new Thread(waitThread);
                 waitThreadInstance.start();
@@ -41,7 +41,7 @@ public class BluetoothMainGUI {
             public void actionPerformed(ActionEvent e) {
                 startServer.setEnabled(true);
                 stopServer.setEnabled(false);
-                currentStatus.setText("Current Status: Stopped");
+                updateStatus("Stopped");
                 updateLog("Server stopped.");
                 waitThread.setThreadStopper(true);
             }
@@ -83,7 +83,20 @@ public class BluetoothMainGUI {
     }
 
     public static void updateStatus(String status) {
-        currentStatus.setText("Current Status: " + status);
+        switch (status) {
+            case "Running":
+                currentStatus.setText("<html><span style='color:black'>Current Status: " + status + "</span></html>");
+                break;
+            case "Connected":
+                currentStatus.setText("<html><span style='color:green'>Current Status: " + status + "</span></html>");
+                break;
+            case "Stopped":
+                currentStatus.setText("<html><span style='color:red'>Current Status: " + status + "</span></html>");
+                break;
+            default:
+                currentStatus.setText("<html><span style='color:black'>Current Status: " + status + "</span></html>");
+                break;
+        }
         updateLog("Status changed to: " + status);
     }
 
