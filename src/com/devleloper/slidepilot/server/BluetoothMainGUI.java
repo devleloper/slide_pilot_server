@@ -88,7 +88,7 @@ public class BluetoothMainGUI {
                 GraphicsConfiguration gc = gd.getDefaultConfiguration();
                 BufferedImage bi = gc.createCompatibleImage(gc.getBounds().width, gc.getBounds().height, Transparency.TRANSLUCENT);
                 Graphics2D g = bi.createGraphics();
-                g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f)); // Прозрачность фона
+                g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f)); 
                 g.setColor(Color.BLACK);
                 g.fillRect(0, 0, bi.getWidth(), bi.getHeight());
 
