@@ -201,12 +201,19 @@ public class ProcessConnectionThread implements Runnable {
                 robot.keyRelease(KeyEvent.VK_SHIFT);
                 robot.keyRelease(KeyEvent.VK_F5);
             }
-            if (command.startsWith("*#*CONTROL+CONTROL*@*")) {
-                robot.keyPress(KeyEvent.VK_CONTROL);
-                robot.keyPress(KeyEvent.VK_CONTROL);
-                robot.keyRelease(KeyEvent.VK_CONTROL);
-                robot.keyRelease(KeyEvent.VK_CONTROL);
+            if (command.startsWith("*#*SPOTLIGHT*@*")) {
+                try {
+                    robot.keyPress(KeyEvent.VK_CONTROL);
+                    robot.keyRelease(KeyEvent.VK_CONTROL);
+                    Thread.sleep(200);
+                    robot.keyPress(KeyEvent.VK_CONTROL);
+                    robot.keyRelease(KeyEvent.VK_CONTROL);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    BluetoothMainGUI.updateLog("Error: " + e.getMessage());
+                }
             }
+            
         } catch (Exception e) {
             e.printStackTrace();
             BluetoothMainGUI.updateLog("Error: " + e.getMessage());
