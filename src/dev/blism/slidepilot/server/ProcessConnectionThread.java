@@ -205,7 +205,7 @@ public class ProcessConnectionThread implements Runnable {
                 try {
                     robot.keyPress(KeyEvent.VK_CONTROL);
                     robot.keyRelease(KeyEvent.VK_CONTROL);
-                    Thread.sleep(200);
+                    Thread.sleep(150);
                     robot.keyPress(KeyEvent.VK_CONTROL);
                     robot.keyRelease(KeyEvent.VK_CONTROL);
                 } catch (InterruptedException e) {
