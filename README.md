@@ -89,3 +89,7 @@ This project is licensed under the MIT License. See the LICENSE file for details
 - [Java](https://www.java.com/en/download/manual.jsp)
 
 - [PowerToys](https://github.com/microsoft/PowerToys/releases/tag/v0.82.1)
+
+## Authors
+
+[Devlet Boltaev](https://github.com/devleloper)
